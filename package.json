@@ -7,7 +7,7 @@
   "main": "h1z1-server.js",
   "dependencies": {
     "@types/lodash": "4.14.168",
-    "@types/mongodb": "3.6.6",
+    "@types/mongodb": "3.6.12",
     "@types/node": "14.14.25",
     "convert_to_int64": "^1.0.1",
     "debug": "4.3.1",
