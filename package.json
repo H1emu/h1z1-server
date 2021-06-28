@@ -9,7 +9,7 @@
     "@types/json-schema": "^7.0.7",
     "@types/lodash": "4.14.170",
     "@types/mongodb": "3.6.12",
-    "@types/node": "15.0.1",
+    "@types/node": "15.12.5",
     "@types/uuid": "^8.3.0",
     "debug": "4.3.1",
     "eul2quat": "^1.0.0",
