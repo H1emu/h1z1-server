@@ -17,7 +17,8 @@
     "mongodb": "3.6.10",
     "mongodb-restore-dump": "1.0.1",
     "terser-output": "1.0.2",
-    "typescript": "4.3.5"
+    "typescript": "4.3.5",
+    "workerpool": "^6.1.5"
   },
   "directories": {
     "src": "./src"
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@swc/cli": "0.1.40",
     "@swc/core": "1.2.57",
+    "@types/workerpool": "^6.0.1",
     "chokidar": "^3.5.1",
     "prettier": "^2.2.1",
     "ts-node": "^10.0.0"
