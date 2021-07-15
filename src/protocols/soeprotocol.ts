@@ -518,9 +518,11 @@ function readDataLength(data: any, offset: number) {
 }
 
 export class SOEProtocol {
-  parse(data: any, crcSeed: number, compression: number) {
+  parse(data: Buffer, crcSeed: number, compression: number) {
+    const buff = Buffer.from(data)
+    console.log(buff)
     const appData: Array<any> = [],
-      packet = parseSOEPacket(data, crcSeed, compression, false, appData);
+      packet = parseSOEPacket(buff, crcSeed, compression, false, appData);
     return {
       soePacket: packet,
       appPackets: appData,

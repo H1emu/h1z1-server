@@ -16,6 +16,7 @@ import { SOEInputStream } from "./soeinputstream";
 import { SOEOutputStream } from "./soeoutputstream";
 import dgram from "dgram";
 import { Client } from "../../types/soeserver";
+import workerpool from 'workerpool';
 
 const debug = require("debug")("SOEServer");
 
@@ -33,6 +34,7 @@ export class SOEServer extends EventEmitter {
   _crcSeed: number;
   _crcLength: number;
   _maxOutOfOrderPacketsPerLoop: number;
+  _pool: workerpool.WorkerPool;
 
   constructor(
     protocolName: string,
@@ -56,6 +58,7 @@ export class SOEServer extends EventEmitter {
     this._useEncryption = true;
     this._isGatewayServer = isGatewayServer;
     this._clients = {};
+    this._pool = workerpool.pool(__dirname + '/soeworker.js');;
     this._connection = dgram.createSocket("udp4");
 
     this._connection.on("message", (data, remote) => {
@@ -63,7 +66,7 @@ export class SOEServer extends EventEmitter {
         let client: any;
         const clientId = remote.address + ":" + remote.port;
         debug(data.length + " bytes from ", clientId);
-        let unknow_client;
+        let unknow_client: boolean;
         // if doesn't know the client
         if (!this._clients[clientId]) {
           unknow_client = true;
@@ -189,26 +192,39 @@ export class SOEServer extends EventEmitter {
           this.emit("connect", null, this._clients[clientId]);
         }
         client = this._clients[clientId];
-        const result = this._protocol.parse(
-          data,
-          client.crcSeed,
-          client.compression
-        );
-        if (result !== undefined && result !== null) {
-          if (
-            !unknow_client &&
-            result.soePacket &&
-            result.soePacket.name === "SessionRequest"
-          ) {
-            delete this._clients[clientId];
-            debug(
-              "Delete an old session badly closed by the client (",
-              clientId,
-              ") )"
-            );
+       this._pool.exec('parse', [data,client.crcSeed,client.compression])
+        .then((result) => {
+          if (result !== undefined && result !== null) {
+            if (
+              !unknow_client &&
+              result.soePacket &&
+              result.soePacket.name === "SessionRequest"
+            ) {
+              delete this._clients[clientId];
+              debug(
+                "Delete an old session badly closed by the client (",
+                clientId,
+                ") )"
+              );
+            }
+          }
+          if(result.appPackets.length){
+            for (let index = 0; index < result.appPackets.length; index++) {
+              result.appPackets[index].data = Buffer.from(result.appPackets[index].data);
+            }
+            result.soePacket.result.data = Buffer.from(result.soePacket.result.data);
+          }
+          if(result.soePacket.result.data){
+            result.soePacket.result.data = Buffer.from(result.soePacket.result.data);
           }
           this.handlePacket(client, result);
-        }
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+    .then(()=>{
+      this._pool.terminate(); // terminate all workers when done
+    });
       } catch (e) {
         console.log(e);
       }
