@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@swc/cli": "0.1.40",
-    "@swc/core": "1.2.57",
+    "@swc/core": "1.2.78",
     "chokidar": "^3.5.1",
     "prettier": "^2.2.1",
     "ts-node": "^10.0.0"
