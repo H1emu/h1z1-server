@@ -14,7 +14,7 @@
     "@swc/cli": "0.1.40",
     "@swc/core": "1.2.57",
     "@types/json-schema": "7.0.9",
-    "@types/node": "16.7.9",
+    "@types/node": "16.11.10",
     "debug": "4.3.2",
     "h1emu-core": "0.6.2",
     "h1z1-dataschema": "1.5.7",
