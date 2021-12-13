@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@swc/cli": "0.1.40",
-    "@swc/core": "1.2.57",
+    "@swc/core": "1.2.120",
     "@types/json-schema": "7.0.9",
     "@types/node": "16.7.9",
     "debug": "4.3.3",
