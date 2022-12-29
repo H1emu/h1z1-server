@@ -165,7 +165,7 @@ export class zonePacketHandlers {
       client.character.isReady = true;
     }
 
-    client.isLoading = false;
+    //client.isLoading = false; // fixes no collision with some npcs (Construction mainly fixed previously by Avcio but has re-appeared)
     if (!client.character.isAlive || client.character.isRespawning) {
       // try to fix stuck on death screen
       server.sendData(client, "Character.StartMultiStateDeath", {
