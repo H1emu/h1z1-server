@@ -318,7 +318,12 @@ export interface ClientBan {
   active: boolean;
   unBanAdminName: string;
 }
-
+export interface UserVerification {
+  guid:string;
+  discordId:string;
+  verifyCode: number;
+  isVerified: boolean;
+}
 export interface ClientMute {
   name:string;
   muteReason: string;

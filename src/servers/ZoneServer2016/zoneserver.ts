@@ -1699,9 +1699,10 @@ export class ZoneServer2016 extends EventEmitter {
           new Date().getTime() + 300000;
         // find neighboring grids and add to blocked ones
         this._spawnGrid.forEach((cell: SpawnCell) => {
-          if (isPosInRadius(1100, cell.position, spawnCell.position)) {
+          if (isPosInRadius(1100, cell.position, spawnCell.position) && !isPosInRadius(69, cell.position, spawnCell.position)) {
+            console.log(`SPAWN GRID: ${spawnCell.position}`)
             client.character.spawnGridData[this._spawnGrid.indexOf(cell)] =
-              new Date().getTime() + 300000;
+              new Date().getTime() + 120000;
           }
         });
       }

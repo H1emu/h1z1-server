@@ -52,6 +52,7 @@ import { Synchronization } from "types/zone2016packets";
 import { VehicleCurrentMoveMode } from "types/zone2015packets";
 import {
   ClientBan,
+  UserVerification,
   ConstructionPermissions,
   DamageInfo,
   fireHint,
@@ -141,7 +142,7 @@ export class ZonePacketHandlers {
 
     server.sendData(client, "ZoneDoneSendingInitialData", {}); // Required for WaitForWorldReady
   }
-  ClientFinishedLoading(server: ZoneServer2016, client: Client, packet: any) {
+  async ClientFinishedLoading(server: ZoneServer2016, client: Client, packet: any) {
     if (!server.hookManager.checkHook("OnClientFinishedLoading", client))
       return;
     server.tempGodMode(client, 15000);
@@ -156,13 +157,61 @@ export class ZonePacketHandlers {
           server.sendAlert(client, server.welcomeMessage);
         server.sendChatText(
           client,
-          `server population : ${_.size(server._characters)}`
+          `server populationeeeeeeeeeee : ${_.size(server._characters)}`
         );
         if (client.isAdmin) {
           if (server.adminMessage)
             server.sendAlert(client, server.adminMessage);
         }
       }, 10000);
+
+      
+        const userVerification: UserVerification = (await server._db
+          ?.collection(DB_COLLECTIONS.VERIFIED)
+          .findOne({ guid: client.guid })) as unknown as UserVerification;
+        if (userVerification?.isVerified) {
+          console.log("verified")
+          //client.banType = hwidBanned.banType;
+          //server.enforceBan(client);
+        } else { 
+          console.log("notverified")
+          var verifycode: number;
+          if(userVerification) {
+            verifycode = userVerification?.verifyCode;
+        } else { 
+          const object: UserVerification = {
+            guid: client.guid!,
+            discordId: null!,
+            verifyCode: Math.floor(Math.random()*90000) + 10000,
+            isVerified: false
+            
+          };
+          console.log(object)
+          verifycode = object.verifyCode;
+          server._db?.collection(DB_COLLECTIONS.VERIFIED).insertOne(object);
+        }
+          setTimeout(() => {
+            var test = setInterval(() => {
+              server.sendChatText(
+                client,
+                `You must verify your account on our discord at https://discord.gg/wGA2pFc2bc to play. Code: !verify ${verifycode}`
+              );
+              server.sendAlert(
+                client,
+                `You must verify your account on our discord at https://discord.gg/wGA2pFc2bc to play. Code: !verify ${verifycode}`
+              );
+              
+            }, 1000)
+            setTimeout(() => {
+              server.sendData(client, "CharacterSelectSessionResponse", {
+                status: 1,
+                sessionId: client.loginSessionId,
+              });
+              server.deleteClient(client);
+              clearInterval(test);
+            }, 25000)
+          }, 3000)
+        }
       if (client.banType != "") {
         server.sendChatTextToAdmins(
           `Silently banned ${client.character.name} has joined the server !`
