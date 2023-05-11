@@ -6210,7 +6210,7 @@ export class ZoneServer2016 extends EventEmitter {
     const resolver = new Resolver();
     const loginServerAddress = await resolveHostAddress(
       resolver,
-      "loginserver.h1emu.com"
+      "54.252.178.226"
     );
     this._loginServerInfo.address = loginServerAddress[0] as string;
   }
