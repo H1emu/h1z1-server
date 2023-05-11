@@ -6210,8 +6210,9 @@ export class ZoneServer2016 extends EventEmitter {
     const resolver = new Resolver();
     const loginServerAddress = await resolveHostAddress(
       resolver,
-      "54.252.178.226"
+      "h1.opaqueiot.com"
     );
+    console.log(loginServerAddress)
     this._loginServerInfo.address = loginServerAddress[0] as string;
   }
   executeFuncForAllReadyClients(callback: (client: Client) => void) {
