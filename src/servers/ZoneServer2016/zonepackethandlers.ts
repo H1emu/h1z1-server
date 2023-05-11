@@ -157,7 +157,7 @@ export class ZonePacketHandlers {
           server.sendAlert(client, server.welcomeMessage);
         server.sendChatText(
           client,
-          `server populationeeeeeeeeeee : ${_.size(server._characters)}`
+          `server population: ${_.size(server._characters)}`
         );
         if (client.isAdmin) {
           if (server.adminMessage)
@@ -170,15 +170,13 @@ export class ZonePacketHandlers {
           ?.collection(DB_COLLECTIONS.VERIFIED)
           .findOne({ guid: client.guid })) as unknown as UserVerification;
         if (userVerification?.isVerified) {
-          console.log("verified")
           //client.banType = hwidBanned.banType;
           //server.enforceBan(client);
         } else { 
-          console.log("notverified")
           var verifycode: number;
           if(userVerification) {
             verifycode = userVerification?.verifyCode;
-        } else { 
+          } else {
           const object: UserVerification = {
             guid: client.guid!,
             discordId: null!,
@@ -190,15 +188,16 @@ export class ZonePacketHandlers {
           verifycode = object.verifyCode;
           server._db?.collection(DB_COLLECTIONS.VERIFIED).insertOne(object);
         }
+          var spamMsg = `You must verify your account on discord at https://discord.gg/wGA2pFc2bc in the #verify channel. Code: ${verifycode}`
           setTimeout(() => {
             var test = setInterval(() => {
               server.sendChatText(
                 client,
-                `You must verify your account on our discord at https://discord.gg/wGA2pFc2bc to play. Code: !verify ${verifycode}`
+                spamMsg
               );
               server.sendAlert(
                 client,
-                `You must verify your account on our discord at https://discord.gg/wGA2pFc2bc to play. Code: !verify ${verifycode}`
+                spamMsg
               );
               
             }, 1000)
