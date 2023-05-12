@@ -899,9 +899,9 @@ export class LoginServer extends EventEmitter {
       banInfos.push({ banInfo: BAN_INFO.HWID });
     }
 
-    if (!(await this.isClientVerified(client))) {
-      banInfos.push({ banInfo: BAN_INFO.UNVERIFIED });
-    }
+    // if (!(await this.isClientVerified(client))) {
+    //   banInfos.push({ banInfo: BAN_INFO.UNVERIFIED });
+    // }
 
     return banInfos;
   }
