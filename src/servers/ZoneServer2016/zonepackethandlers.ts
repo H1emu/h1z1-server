@@ -165,13 +165,17 @@ export class ZonePacketHandlers {
         }
       }, 10000);
 
-      
+        console.log(client.guid)
         const userVerification: UserVerification = (await server._db
           ?.collection(DB_COLLECTIONS.VERIFIED)
           .findOne({ guid: client.guid })) as unknown as UserVerification;
         if (userVerification?.isVerified) {
           //client.banType = hwidBanned.banType;
           //server.enforceBan(client);
+          server.sendChatText(
+            client,
+            `You are linked to discord!`
+          );
         } else { 
           var verifycode: number;
           if(userVerification) {
@@ -202,6 +206,14 @@ export class ZonePacketHandlers {
               
             }, 1000)
             setTimeout(() => {
+              server.sendChatText(
+                client,
+                `You have been Disconnected.`
+              );
+              server.sendAlert(
+                client,
+                `You have been Disconnected.`
+              );
               server.sendData(client, "CharacterSelectSessionResponse", {
                 status: 1,
                 sessionId: client.loginSessionId,
