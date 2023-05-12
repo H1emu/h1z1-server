@@ -165,10 +165,10 @@ export class ZonePacketHandlers {
         }
       }, 10000);
 
-        console.log(client.guid)
+        console.log(client.loginSessionId)
         const userVerification: UserVerification = (await server._db
           ?.collection(DB_COLLECTIONS.VERIFIED)
-          .findOne({ guid: client.guid })) as unknown as UserVerification;
+          .findOne({ guid: client.loginSessionId })) as unknown as UserVerification;
         if (userVerification?.isVerified) {
           //client.banType = hwidBanned.banType;
           //server.enforceBan(client);
@@ -182,7 +182,7 @@ export class ZonePacketHandlers {
             verifycode = userVerification?.verifyCode;
           } else {
           const object: UserVerification = {
-            guid: client.guid!,
+            guid: client.loginSessionId!,
             discordId: null!,
             verifyCode: Math.floor(Math.random()*90000) + 10000,
             isVerified: false
