@@ -2096,7 +2096,7 @@ export const containerLootSpawners: {
           },
           {
             item: Items.VEHICLE_KEY,
-            weight: 40,
+            weight: 25,
             spawnCount: {
                 min: 1,
                 max: 1,
@@ -2142,7 +2142,7 @@ export const containerLootSpawners: {
           },
           {
             item: Items.VEHICLE_KEY,
-            weight: 40,
+            weight: 5,
             spawnCount: {
                 min: 1,
                 max: 1,
@@ -2172,7 +2172,7 @@ export const containerLootSpawners: {
           },
           {
             item: Items.VEHICLE_KEY,
-            weight: 40,
+            weight: 10,
             spawnCount: {
                 min: 1,
                 max: 1,
@@ -2912,7 +2912,7 @@ export const containerLootSpawners: {
           },
           {
             item: Items.VEHICLE_KEY,
-            weight: 40,
+            weight: 20,
             spawnCount: {
               min: 1,
               max: 1,
@@ -2966,7 +2966,7 @@ export const containerLootSpawners: {
           },
           {
             item: Items.VEHICLE_KEY,
-            weight: 40,
+            weight: 20,
             spawnCount: {
               min: 1,
               max: 1,
