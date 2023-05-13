@@ -575,12 +575,14 @@ export class ConstructionManager {
         isInsidePermissionedFoundation
       )
     ) {
-      this.sendPlacementFinalize(server, client, 0);
-      server.sendAlert(
-        client,
-        "You may not place this object this close to a town or point of interest."
-      );
-      return;
+      if(!client.isAdmin) {
+        this.sendPlacementFinalize(server, client, 0);
+        server.sendAlert(
+          client,
+          "You may not place this object this close to a town or point of interest."
+        );
+        return;
+      }
     }
 
     if (
