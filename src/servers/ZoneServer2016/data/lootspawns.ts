@@ -2094,6 +2094,14 @@ export const containerLootSpawners: {
                   max: 1,
               },
           },
+          {
+            item: Items.VEHICLE_KEY,
+            weight: 25,
+            spawnCount: {
+                min: 1,
+                max: 1,
+            },
+        },
       ],
   },
   Cabinets: {
@@ -2132,6 +2140,14 @@ export const containerLootSpawners: {
                   max: 1,
               },
           },
+          {
+            item: Items.VEHICLE_KEY,
+            weight: 25,
+            spawnCount: {
+                min: 1,
+                max: 1,
+            },
+        },
       ],
   },
   "Cabinets Cube": {
@@ -2154,6 +2170,14 @@ export const containerLootSpawners: {
                   max: 1,
               },
           },
+          {
+            item: Items.VEHICLE_KEY,
+            weight: 25,
+            spawnCount: {
+                min: 1,
+                max: 1,
+            },
+        },
       ],
   },
   "Cabinets Kitchen": {
@@ -2886,6 +2910,14 @@ export const containerLootSpawners: {
                   max: 1,
               },
           },
+          {
+            item: Items.VEHICLE_KEY,
+            weight: 25,
+            spawnCount: {
+              min: 1,
+              max: 1,
+            },
+          },
       ],
   },
   Dresser: {
@@ -2931,6 +2963,14 @@ export const containerLootSpawners: {
                   min: 1,
                   max: 1,
               },
+          },
+          {
+            item: Items.VEHICLE_KEY,
+            weight: 25,
+            spawnCount: {
+              min: 1,
+              max: 1,
+            },
           },
       ],
   },
