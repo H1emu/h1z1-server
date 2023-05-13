@@ -620,7 +620,7 @@ export class WorldObjectManager {
 
     this.setSpawnchance(server, vehicle, 50, Items.BATTERY);
     this.setSpawnchance(server, vehicle, 50, Items.SPARKPLUGS);
-    this.setSpawnchance(server, vehicle, 30, Items.VEHICLE_KEY);
+    this.setSpawnchance(server, vehicle, 50, Items.VEHICLE_KEY);
     this.setSpawnchance(server, vehicle, 20, Items.FUEL_BIOFUEL);
 
     server._vehicles[vehicle.characterId] = vehicle;
