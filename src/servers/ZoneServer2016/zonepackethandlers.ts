@@ -184,7 +184,7 @@ export class ZonePacketHandlers {
           const object: UserVerification = {
             guid: client.loginSessionId!,
             discordId: null!,
-            verifyCode: Math.floor(Math.random()*90000) + 10000,
+            verifyCode: Math.floor(100000 + Math.random() * 9000000), // better larger faster stronger random numbers i  forgot the daft punk lyrics
             isVerified: false
             
           };
