@@ -1201,7 +1201,7 @@ export const lootTables: { [lootSpawner: string]: LootSpawner } = {
               weight: 35,
               spawnCount: {
                   min: 1,
-                  max: 2,
+                  max: 1,
               },
           },
           {
@@ -2667,7 +2667,7 @@ export const containerLootSpawners: {
               weight: 5,
               spawnCount: {
                   min: 1,
-                  max: 2,
+                  max: 1,
               },
           },
           {
@@ -2721,7 +2721,7 @@ export const containerLootSpawners: {
               weight: 8,
               spawnCount: {
                   min: 1,
-                  max: 2,
+                  max: 1,
               },
           },
           {
@@ -3062,7 +3062,7 @@ export const containerLootSpawners: {
               weight: 30,
               spawnCount: {
                   min: 1,
-                  max: 2,
+                  max: 1,
               },
           },
           {
@@ -3140,7 +3140,7 @@ export const containerLootSpawners: {
               weight: 25,
               spawnCount: {
                   min: 1,
-                  max: 2,
+                  max: 1,
               },
           },
       ],

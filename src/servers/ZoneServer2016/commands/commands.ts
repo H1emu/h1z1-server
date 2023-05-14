@@ -1322,7 +1322,7 @@ export const commands: Array<Command> = [
   },
   {
     name: "alert",
-    permissionLevel: PermissionLevels.ADMIN,
+    permissionLevel: PermissionLevels.MODERATOR,
     keepCase: true,
     execute: (server: ZoneServer2016, client: Client, args: Array<string>) => {
       server.sendAlertToAll(args.join(" "));
@@ -2186,7 +2186,7 @@ export const commands: Array<Command> = [
   },
   {
     name: "deepcover",
-    permissionLevel: PermissionLevels.ADMIN,
+    permissionLevel: PermissionLevels.MODERATOR,
     execute: async (
       server: ZoneServer2016,
       client: Client,
