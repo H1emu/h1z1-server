@@ -1910,7 +1910,7 @@ export const commands: Array<Command> = [
   },
   {
     name: "whisper",
-    permissionLevel: PermissionLevels.DEFAULT,
+    permissionLevel: PermissionLevels.MODERATOR,
     keepCase: true,
     execute: async (
       server: ZoneServer2016,
@@ -1972,7 +1972,7 @@ export const commands: Array<Command> = [
   },
   {
     name: "mute",
-    permissionLevel: PermissionLevels.DEFAULT,
+    permissionLevel: PermissionLevels.MODERATOR,
     execute: async (
       server: ZoneServer2016,
       client: Client,
@@ -2013,7 +2013,7 @@ export const commands: Array<Command> = [
   },
   {
     name: "unmute",
-    permissionLevel: PermissionLevels.DEFAULT,
+    permissionLevel: PermissionLevels.MODERATOR,
     execute: async (
       server: ZoneServer2016,
       client: Client,
