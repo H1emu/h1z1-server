@@ -1326,7 +1326,7 @@ export const commands: Array<Command> = [
     permissionLevel: PermissionLevels.MODERATOR,
     keepCase: true,
     execute: (server: ZoneServer2016, client: Client, args: Array<string>) => {
-      server.sendAlertToAll(args.join(" "));
+      server.sendAlertToAll("Broadcast from " + client.character.name + ": " + args.join(" "));
     },
   },
   {

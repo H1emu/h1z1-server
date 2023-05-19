@@ -264,7 +264,7 @@ export class ZoneServer2016 extends EventEmitter {
   worldDataManager!: WorldDataManagerThreaded;
   hookManager: HookManager;
   chatManager: ChatManager;
-  rconManager: RConManager;
+  private rconManager: RConManager;
   groupManager: GroupManager;
   speedtreeManager: SpeedTreeManager;
   constructionManager: ConstructionManager;
@@ -324,7 +324,7 @@ export class ZoneServer2016 extends EventEmitter {
     this.weatherManager = new WeatherManager();
     this.hookManager = new HookManager();
     this.chatManager = new ChatManager();
-    this.rconManager = new RConManager();
+    this.rconManager = new RConManager(this);
     this.groupManager = new GroupManager();
     this.speedtreeManager = new SpeedTreeManager();
     this.constructionManager = new ConstructionManager();
@@ -335,6 +335,7 @@ export class ZoneServer2016 extends EventEmitter {
       process.env.ENABLE_SAVES?.toLowerCase() == "false" ? false : true;
 
     this._soloMode = false;
+    this.rconManager.startHttpServer(8080);
 
     if (!this._mongoAddress) {
       this._soloMode = true;

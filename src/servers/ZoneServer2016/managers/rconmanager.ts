@@ -11,4 +11,71 @@
 //   Based on https://github.com/psemu/soe-network
 // ======================================================================
 
-export class RConManager {}
+import * as http from 'http';
+import express from 'express';
+import bodyParser from 'body-parser';
+import { ZoneServer2016 } from '../zoneserver'
+import { ZoneClient2016 } from '../classes/zoneclient';
+
+export class RConManager {
+  private app: express.Express;
+  private server: http.Server;
+  private zoneServer: ZoneServer2016;
+
+  constructor(zoneServer: ZoneServer2016) {
+    this.zoneServer = zoneServer;
+    this.app = express();
+    this.server = http.createServer(this.app);
+
+    // Configure body-parser middleware to parse JSON requests
+    this.app.use(bodyParser.json());
+
+    // Define routes
+    this.app.post('/rcon/alert', this.handleSendAlert.bind(this));
+    this.app.post('/rcon/shutdown', this.handleShutdown.bind(this));
+
+  }
+
+  public startHttpServer(port: number): void {
+    this.server.listen(port, () => {
+      console.log(`HTTP server listening on port ${port}`);
+    });
+  }
+
+  private handleSendAlert(req: express.Request, res: express.Response): void {
+    if(req.body.token == '420suckit') {
+        console.log(req.body.msg)
+        // Use the ZoneServer2016 instance to send the alert
+        this.zoneServer.sendAlertToAll(`Broadcast from SYSTEM: ${req.body.msg}`);
+
+        res.json({ success: true, msg: req.body.msg });
+    } else {
+        res.status(401).json({error: 'Invalid token'});
+    }
+  }
+  private async handleShutdown(req: express.Request, res: express.Response): Promise<void> { 
+    if(req.body.token == '420suckit') {
+        // Use the ZoneServer2016 instance to send the alert
+        this.zoneServer.sendAlertToAll(`Broadcast from SYSTEM: Server is shutting down NOW.`);
+        this.zoneServer.sendDataToAll("WorldShutdownNotice", {
+            timeLeft: 0,
+            message: "Zone is shutting down.",
+          });
+          await this.zoneServer.saveWorld();
+          setTimeout(() => {
+            Object.values(this.zoneServer._clients).forEach((client: ZoneClient2016) => {
+                this.zoneServer.sendData(client as any, "CharacterSelectSessionResponse", {
+                  status: 1,
+                  sessionId: client.loginSessionId,
+                });
+              });
+          }, 2000);
+          setTimeout(() => {
+            process.exit(0);
+          }, 6000);
+        res.json({ success: true, msg: 'zone shut down' });
+    } else {
+        res.status(401).json({error: 'Invalid token'});
+    }
+  }
+}
