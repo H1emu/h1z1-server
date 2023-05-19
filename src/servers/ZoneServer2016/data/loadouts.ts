@@ -48,7 +48,32 @@ export const characterKitLoadout = [
   { item: Items.HELMET_MOTORCYCLE },
   { item: Items.CONVEYS_BLUE },
 ];
-
+export const eventKitLoadout = [
+{ item: Items.AMMO_308, count: 200 },
+{ item: Items.WEAPON_REAPER, count: 2 },
+{ item: Items.WEAPON_NAGAFENS_RAGE, count: 2 },
+{ item: Items.WEAPON_FROSTBITE, count: 2 },
+{ item: Items.CODED_MESSAGE, count: 25 },
+{ item: 3366, count: 5 },
+{ item: 3439, count: 5 },
+{ item: Items.FERTILIZER, count: 25 },
+{ item: Items.METAL_GATE, count: 10 },
+{ item: Items.SHELTER_UPPER_LARGE, count: 5 },
+{ item: Items.SHELTER_LARGE, count: 5 },
+{ item: Items.SHELTER, count: 5 },
+{ item: Items.METAL_WALL, count: 10 },
+{ item: Items.METAL_WALL_UPPER, count: 10 },
+{ item: Items.METAL_SHEET, count: 200 },
+{ item: Items.METAL_SCRAP, count: 300 },
+{ item: Items.AMMO_762, count: 200 },
+{ item: Items.AMMO_223, count: 200 },
+{ item: Items.AMMO_12GA, count: 200 },
+{ item: Items.BANDAGE_DRESSED, count: 200 },
+{ item: Items.SWIZZLE, count: 20 },
+{ item: Items.SHACK, count: 2 },
+{ item: Items.DOOR_METAL, count: 2 },
+{ item: Items.STORAGE_BOX, count: 5 },
+];
 export const characterBuildKitLoadout = [
   { item: Items.FOUNDATION, count: 10 },
   { item: Items.FOUNDATION_EXPANSION, count: 40 },
