@@ -23,8 +23,12 @@ function requireAuthorization(
   next: express.NextFunction
 ): void {
   const authorizationHeader = req.headers.authorization;
-  const expectedKey = "yeet"; // Replace with your desired static key
+  const expectedKey = process.env.RCON_PASSWORD;
 
+  if(!expectedKey) {
+    res.status(401).json({ error: "Key not set" });
+    return;
+  }
   if (!authorizationHeader || authorizationHeader !== expectedKey) {
     res.status(401).json({ error: "Unauthorized" });
     return;
@@ -65,7 +69,7 @@ export class RConManager {
     var players = this.zoneServer._clients;
     var playerList: {
       guid: string | undefined;
-      character: { name: string };
+      character: { name: string  };
       isAdmin: boolean;
       isDebugMode: boolean;
       HWID: string;
@@ -89,10 +93,17 @@ export class RConManager {
     }[] = [];
     Object.values(this.zoneServer._clients).forEach(
       (client: ZoneClient2016) => {
+        const { position, rotation } = client.character.state;
+        // client,
+        // `position: ${position[0].toFixed(2)},${position[1].toFixed(
+        //   2
+        // )},${position[2].toFixed(2)}`
         playerList.push({
           guid: client.guid,
           character: {
-            name: client.character.name,
+            name: client.character.name
+            // positon: ,
+            // rotation
           },
           isAdmin: client.isAdmin,
           isDebugMode: client.isDebugMode,
