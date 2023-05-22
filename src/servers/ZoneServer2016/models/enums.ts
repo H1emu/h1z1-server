@@ -421,6 +421,7 @@ export enum Items {
   SNARE = 1415,
   ANIMAL_TRAP = 91,
   BARBED_WIRE = 108,
+  SANDBAG_WALL = 2242,
   BARBEQUE = 1447,
   BEE_BOX = 2034,
   CAMPFIRE = 15,

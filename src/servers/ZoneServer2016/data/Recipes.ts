@@ -803,6 +803,23 @@ export const recipes: { [recipeId: number]: Recipe } = {
       },
     ],
   },
+  [Items.SANDBAG_WALL]: {
+    filterId: FilterIds.SURVIVAL,
+    components: [
+      {
+        itemDefinitionId: Items.CLOTH,
+        requiredAmount: 3,
+      },
+      {
+        itemDefinitionId: Items.TWINE,
+        requiredAmount: 1,
+      },
+      {
+        itemDefinitionId: Items.DUCT_TAPE,
+        requiredAmount: 1,
+      },
+    ],
+  },
   [Items.BARBEQUE]: {
     filterId: FilterIds.HOUSING,
     components: [
@@ -1056,7 +1073,7 @@ export const recipes: { [recipeId: number]: Recipe } = {
     ],
   },
   [Items.FOUNDATION]: {
-    filterId: FilterIds.SURVIVAL,
+    filterId: FilterIds.HOUSING,
     components: [
       {
         itemDefinitionId: Items.WOOD_LOG,
