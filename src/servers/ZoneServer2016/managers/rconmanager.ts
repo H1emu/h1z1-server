@@ -25,7 +25,7 @@ function requireAuthorization(
   const authorizationHeader = req.headers.authorization;
   const expectedKey = process.env.RCON_PASSWORD;
 
-  if(!expectedKey) {
+  if (!expectedKey) {
     res.status(401).json({ error: "Key not set" });
     return;
   }
@@ -69,18 +69,10 @@ export class RConManager {
     var players = this.zoneServer._clients;
     var playerList: {
       guid: string | undefined;
-      character: { name: string  };
+      character: { name: string; position: string };
       isAdmin: boolean;
       isDebugMode: boolean;
       HWID: string;
-      pvpStats: {
-        shotsFired: number;
-        shotsHit: number;
-        head: number;
-        spine: number;
-        hands: number;
-        legs: number;
-      };
       clientLogs: {
         log: string;
         isSuspicious: boolean;
@@ -95,20 +87,30 @@ export class RConManager {
       (client: ZoneClient2016) => {
         const { position, rotation } = client.character.state;
         // client,
-        // `position: ${position[0].toFixed(2)},${position[1].toFixed(
-        //   2
-        // )},${position[2].toFixed(2)}`
+        // `position: ${position[0].toFixed(2)},${position[1].toFixed(2)},${position[2].toFixed(2)}`
+        var positionString = JSON.stringify({
+          pos: [
+            position[0].toFixed(2),
+            position[1].toFixed(2),
+            position[2].toFixed(2),
+          ],
+          rot: [
+            rotation[0].toFixed(2),
+            rotation[1].toFixed(2),
+            rotation[2].toFixed(2)
+          ]
+        });
         playerList.push({
           guid: client.guid,
           character: {
-            name: client.character.name
+            name: client.character.name,
             // positon: ,
+            position: positionString,
             // rotation
           },
           isAdmin: client.isAdmin,
           isDebugMode: client.isDebugMode,
           HWID: client.HWID,
-          pvpStats: client.pvpStats,
           clientLogs: client.clientLogs,
           loginSessionId: client.loginSessionId,
           sessionId: client.sessionId,
