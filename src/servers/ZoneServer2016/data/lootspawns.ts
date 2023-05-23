@@ -3003,8 +3003,8 @@ export const containerLootSpawners: {
               },
           },
           {
-              item: Items.HAT_CAP,
-              weight: 50,
+              item: Items.KEVLAR_DEFAULT,
+              weight: 25,
               spawnCount: {
                   min: 1,
                   max: 1,
