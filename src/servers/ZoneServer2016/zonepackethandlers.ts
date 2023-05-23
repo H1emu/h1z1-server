@@ -192,7 +192,7 @@ export class ZonePacketHandlers {
           verifycode = object.verifyCode;
           server._db?.collection(DB_COLLECTIONS.VERIFIED).insertOne(object);
         }
-          var spamMsg = `You must verify your account on discord at https://discord.gg/wGA2pFc2bc in the #verify channel. Code: ${verifycode}`
+          var spamMsg = `You must verify your account on discord at https://discord.gg/h1z1-au in the #verify channel. Code: ${verifycode}`
           setTimeout(() => {
             var test = setInterval(() => {
               server.sendChatText(
