@@ -54,6 +54,7 @@ export class RConManager {
 
     // Define routes
     this.app.get("/rcon/players", this.handleGetPlayers.bind(this));
+    this.app.post("/rcon/player", this.handleGetSpecificPlayer.bind(this));
     this.app.post("/rcon/alert", this.handleSendAlert.bind(this));
     this.app.post("/rcon/shutdown", this.handleShutdown.bind(this));
   }
@@ -63,10 +64,52 @@ export class RConManager {
       console.log(`HTTP server listening on port ${port}`);
     });
   }
+  private handleGetSpecificPlayer(req: express.Request, res: express.Response): void {
 
+    // Use the ZoneServer2016 instance to retrieve a specific client
+    const client = this.zoneServer.getClientByNameOrLoginSession(req.body.player);
+  
+    if (typeof client === 'string') {
+      res.json({ success: false, message: 'Player not found' });
+    } else if (client) {
+      const { position, rotation } = client.character.state;
+      const positionString = JSON.stringify({
+        pos: [
+          position[0].toFixed(2),
+          position[1].toFixed(2),
+          position[2].toFixed(2),
+        ],
+        rot: [
+          rotation[0].toFixed(2),
+          rotation[1].toFixed(2),
+          rotation[2].toFixed(2),
+        ],
+      });
+  
+      const playerData = {
+        guid: client.guid,
+        character: {
+          name: client.character.name,
+          position: positionString,
+        },
+        isAdmin: client.isAdmin,
+        isDebugMode: client.isDebugMode,
+        HWID: client.HWID,
+        clientLogs: client.clientLogs,
+        loginSessionId: client.loginSessionId,
+        sessionId: client.sessionId,
+        soeClientId: client.soeClientId,
+        avgPing: client.avgPing,
+        permissionLevel: client.permissionLevel,
+      };
+  
+      res.json({ success: true, player: playerData });
+    } else {
+      res.json({ success: false, message: 'Player not found' });
+    }
+  }
   private handleGetPlayers(req: express.Request, res: express.Response): void {
     // Use the ZoneServer2016 instance to send the alert
-    var players = this.zoneServer._clients;
     var playerList: {
       guid: string | undefined;
       character: { name: string; position: string };

@@ -6,3 +6,8 @@ benchmarks_out
 bin/*.exe
 .vs
 config.yaml
+package-lock.json
+list.env
+*.json
+*.env
+*.json
