@@ -172,6 +172,7 @@ export class RConManager {
 
     res.json({ success: true, msg: req.body.msg });
   }
+  
   private async handleShutdown(
     req: express.Request,
     res: express.Response

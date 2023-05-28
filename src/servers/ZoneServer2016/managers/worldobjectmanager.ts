@@ -348,7 +348,6 @@ export class WorldObjectManager {
       "Demolitioner",
       "Medic",
       "Builder",
-      "Fighter",
       "Supplier",
     ];
     const experimentalWeapons: { weapon: number; ammo: number }[] = [
@@ -395,25 +394,6 @@ export class WorldObjectManager {
         break;
       case "Builder":
         effectId = Effects.Smoke_Purple;
-        break;
-      case "Fighter":
-        effectId = Effects.Smoke_Red;
-        if (container) {
-          const experimental =
-            experimentalWeapons[
-              Math.floor(Math.random() * experimentalWeapons.length)
-            ];
-          server.addContainerItem(
-            lootbag,
-            server.generateItem(experimental.weapon, 1),
-            container
-          );
-          server.addContainerItem(
-            lootbag,
-            server.generateItem(experimental.ammo, 30),
-            container
-          );
-        }
         break;
       case "Supplier":
         effectId = Effects.Smoke_Yellow;

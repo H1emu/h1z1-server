@@ -2679,10 +2679,12 @@ export class ZonePacketHandlers {
             let blockedTime = 50;
             switch (weaponItem.itemDefinitionId) {
               case Items.WEAPON_308:
+                blockedTime = 1300;
               case Items.WEAPON_REAPER:
                 blockedTime = 1300;
                 break;
               case Items.WEAPON_SHOTGUN:
+                blockedTime = 400;
               case Items.WEAPON_NAGAFENS_RAGE:
                 blockedTime = 400;
                 break;
