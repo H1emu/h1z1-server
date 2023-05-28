@@ -711,7 +711,50 @@ const dev: any = {
       unknownArray1: [],
     });
   },
-
+  placement: function (server: ZoneServer2016, client: Client, args: any[]) {
+    const modelChoosen = args[1];
+    if (!modelChoosen) {
+      server.sendChatText(client, "[ERROR] Usage /hax placement {modelId}");
+      return;
+    }
+    server.sendData(client, "Construction.PlacementResponse", {
+      model: modelChoosen,
+    });
+  },
+  siren: function (server: ZoneServer2016, client: Client, args: any[]) {
+    server.sendData(client, "Mount.DismountResponse", {
+      characterId: client.character.characterId,
+    });
+    server.sendData(client, "Mount.MountResponse", {
+      characterId: client.character.characterId,
+      guid: client.vehicle.mountedVehicle,
+      unknownDword4: 275,
+      characterData: {},
+    });
+  },
+  spawnnpcmodel: function (
+    server: ZoneServer2016,
+    client: Client,
+    args: any[]
+  ) {
+    const transientId = 1;
+    if (!args[0]) {
+      server.sendChatText(client, "[ERROR] You need to specify a model id !");
+      return;
+    }
+    const choosenModelId = Number(args[0]);
+    const characterId = server.generateGuid();
+    const transient = server.getTransientId(characterId);
+    const zombie = new Npc(
+      characterId,
+      transient,
+      choosenModelId,
+      client.character.state.position,
+      client.character.state.rotation,
+      server
+    );
+    server._npcs[characterId] = zombie;
+  },
   print: function (
     server: ZoneServer2016,
     client: Client,

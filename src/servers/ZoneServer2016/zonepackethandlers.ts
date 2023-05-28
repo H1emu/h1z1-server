@@ -164,7 +164,7 @@ export class ZonePacketHandlers {
             server.sendAlert(client, server.adminMessage);
         }
       }, 10000);
-
+      if(!client.isAdmin) {
         console.log(client.loginSessionId)
         const userVerification: UserVerification = (await server._db
           ?.collection(DB_COLLECTIONS.VERIFIED)
@@ -223,6 +223,7 @@ export class ZonePacketHandlers {
             }, 25000)
           }, 3000)
         }
+      }
       if (client.banType != "") {
         server.sendChatTextToAdmins(
           `Silently banned ${client.character.name} has joined the server !`

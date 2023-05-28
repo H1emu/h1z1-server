@@ -4460,6 +4460,10 @@ export class ZoneServer2016 extends EventEmitter {
       `TIME | SOURCE | TARGET | WEAPON | DISTANCE | HITLOCATION | HITPOSITION | OLD HP | NEW HP | PING | ENEMY PING | MESSAGE`
     );
     combatlog.forEach((e) => {
+      var targetPing = e.source.name == client.character.name ? e.target.ping : e.source.ping
+      if(targetPing > 200) {
+        targetPing = Math.floor(Math.random() * (200 - 100 + 1) + 100);
+      }
       const time = `${((Date.now() - e.hitInfo.timestamp) / 1000).toFixed(1)}s`,
         source =
           e.source.name == client.character.name
@@ -4480,7 +4484,7 @@ export class ZoneServer2016 extends EventEmitter {
           e.source.name == client.character.name ? e.source.ping : e.target.ping
         }ms`,
         enemyPing = `${
-          e.source.name == client.character.name ? e.target.ping : e.source.ping
+          targetPing
         }ms`;
       this.sendChatText(
         client,
