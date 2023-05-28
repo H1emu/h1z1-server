@@ -10,7 +10,7 @@ server:
 # Fairplay / anticheat config
 fairplay:
   useFairplay: true
-  maxPing: 250
+  maxPing: 220
   pingTimeoutTime: 30000
 
 weather:
