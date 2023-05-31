@@ -2548,9 +2548,9 @@ export class ZoneServer2016 extends EventEmitter {
         return calculate_falloff(
           getDistance(sourcePos, targetPos),
           200,
-          2400, //1667,
-          3,
-          20
+          1850, //1667,
+          1,
+          12
         );
       case Items.WEAPON_NAGAFENS_RAGE:
         return calculate_falloff(
