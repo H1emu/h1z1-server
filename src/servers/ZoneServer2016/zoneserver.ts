@@ -2548,7 +2548,7 @@ export class ZoneServer2016 extends EventEmitter {
         return calculate_falloff(
           getDistance(sourcePos, targetPos),
           200,
-          1850, //1667,
+          1500, //1667,
           1,
           12
         );
