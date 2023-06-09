@@ -17,85 +17,85 @@ import { Items } from "../models/enums";
 const carparts = [
   // NEED TO ADJUST THESE WEIGHTS
   {
-      item: Items.BATTERY,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.BATTERY,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.SPARKPLUGS,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.SPARKPLUGS,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.HEADLIGHTS_OFFROADER,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.HEADLIGHTS_OFFROADER,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.HEADLIGHTS_POLICE,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.HEADLIGHTS_POLICE,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.HEADLIGHTS_ATV,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.HEADLIGHTS_ATV,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.HEADLIGHTS_PICKUP,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.HEADLIGHTS_PICKUP,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.TURBO_OFFROADER,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.TURBO_OFFROADER,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.TURBO_POLICE,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.TURBO_POLICE,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.TURBO_ATV,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
+    item: Items.TURBO_ATV,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
   },
   {
-      item: Items.TURBO_PICKUP,
-      weight: 5,
-      spawnCount: {
-          min: 1,
-          max: 1,
-      },
-  },
+    item: Items.TURBO_PICKUP,
+    weight: 5,
+    spawnCount: {
+      min: 1,
+      max: 1
+    }
+  }
 ];
 
 export const lootTables: { [lootSpawner: string]: LootSpawner } = {
