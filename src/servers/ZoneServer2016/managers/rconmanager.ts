@@ -54,7 +54,12 @@ export class RConManager {
 
     // Define routes
     this.app.get("/rcon/players", this.handleGetPlayers.bind(this));
+
     this.app.post("/rcon/player", this.handleGetSpecificPlayer.bind(this));
+    this.app.post("/rcon/player/kick", this.handleKickPlayer.bind(this));
+    this.app.post("/rcon/player/alert", this.handleSendPlayerNotification.bind(this));
+    // this.app.post("/rcon/player/packet", this.handleSendPlayerNotification.bind(this));
+
     this.app.post("/rcon/alert", this.handleSendAlert.bind(this));
     this.app.post("/rcon/shutdown", this.handleShutdown.bind(this));
   }
@@ -63,6 +68,45 @@ export class RConManager {
     this.server.listen(port, () => {
       console.log(`HTTP server listening on port ${port}`);
     });
+  }
+  private handleSendPlayerNotification(req: express.Request, res: express.Response): void {
+    // Use the ZoneServer2016 instance to retrieve a specific client
+    const client = this.zoneServer.getClientByNameOrLoginSession(req.body.player);
+  
+    if (typeof client === 'string') {
+      res.json({ success: false, message: 'Player not found' });
+    } else if (client) {
+      this.zoneServer.sendChatText(
+        client,
+        req.body.msg
+      );
+      this.zoneServer.sendAlert(
+        client,
+        req.body.msg
+      );
+  
+      res.json({ success: true });
+    } else {
+      res.json({ success: false, message: 'Player not found' });
+    }
+  }
+  private handleKickPlayer(req: express.Request, res: express.Response): void {
+    // Use the ZoneServer2016 instance to retrieve a specific client
+    const client = this.zoneServer.getClientByNameOrLoginSession(req.body.player);
+  
+    if (typeof client === 'string') {
+      res.json({ success: false, message: 'Player not found' });
+    } else if (client) {
+      this.zoneServer.sendData(client, "CharacterSelectSessionResponse", {
+        status: 1,
+        sessionId: client.loginSessionId
+      });
+      this.zoneServer.deleteClient(client);
+  
+      res.json({ success: true });
+    } else {
+      res.json({ success: false, message: 'Player not found' });
+    }
   }
   private handleGetSpecificPlayer(req: express.Request, res: express.Response): void {
 
