@@ -256,6 +256,7 @@ import { AiManager } from "h1emu-ai";
 import { clearInterval, setInterval } from "node:timers";
 import { NavManager } from "../../utils/recast";
 import { ProjectileEntity } from "./entities/projectileentity";
+import { ChallengeManager } from "./managers/challengemanager";
 
 const spawnLocations2 = require("../../../data/2016/zoneData/Z1_gridSpawns.json"),
   deprecatedDoors = require("../../../data/2016/sampleData/deprecatedDoors.json"),
@@ -473,6 +474,7 @@ export class ZoneServer2016 extends EventEmitter {
   navManager: NavManager;
   staticBuildings: AddSimpleNpc[] = require("../../../data/2016/sampleData/staticbuildings.json");
   worldSaveFailed: boolean = false;
+  challengeManager: ChallengeManager;
 
   constructor(
     serverPort: number,
@@ -506,6 +508,7 @@ export class ZoneServer2016 extends EventEmitter {
     this.playTimeManager = new PlayTimeManager();
     this.aiManager = new AiManager();
     this.navManager = new NavManager();
+    this.challengeManager = new ChallengeManager(this);
     /* CONFIG MANAGER MUST BE INSTANTIATED LAST ! */
     this.configManager = new ConfigManager(this, process.env.CONFIG_PATH);
     this.enableWorldSaves =
