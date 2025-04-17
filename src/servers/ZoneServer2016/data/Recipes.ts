@@ -2568,4 +2568,21 @@ export const recipes: { [recipeId: number]: Recipe } = {
       }
     ]
   }
-};
+}
+ [Items.AIO_COLD_MEDICINE]: {  
+    filterid: FilterIds.COOKING,
+    components: [
+      {
+        itemDefinitionId: Items.VITAMINS,
+        requiredAmount: 1
+      },
+      {
+        itemDefinitionId: Items.IMMUNITY_BOOSTERS,
+        requiredAmount: 1
+      },
+      {
+        itemDefinitionId: Items.ANTIBIOTICS,
+        requiredAmount: 1
+      }
+    ]
+  }.
