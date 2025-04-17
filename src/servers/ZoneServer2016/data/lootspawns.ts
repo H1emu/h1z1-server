@@ -2705,9 +2705,16 @@ export const containerLootSpawners: {
           min: 1,
           max: 1
         }
-      }
+      },
+      {
+        item: Items.AIO_COLD_MEDICINE,
+        weight: 45,
+        spawnCount: {
+          min: 1,
+          max: 2
+      }  
     ]
-  },
+    },
   "Tool Cabinet": {
     spawnChance: 100,
     maxItems: 3,
